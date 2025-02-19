@@ -1,4 +1,4 @@
-package program;
+  package program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,8 @@ public class PermutationAndCobinations {
 		}else {
 			for(int i =0;i<n;i++) {
 				permute(coats+s.charAt(i),s.substring(0, i)+s.substring(i+1,n),permutaion);
+//				System.out.println(coats+s.charAt(i));
+//				System.out.println(s.substring(0, i)+s.substring(i+1,n));
 			}
 		}
 	}

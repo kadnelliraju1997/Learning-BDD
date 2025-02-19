@@ -17,7 +17,8 @@ public class Agoda_Com {
 
 	public static void main(String[] args) throws Throwable {
 		WebDriver driver = new ChromeDriver();
-		driver.get("https://www.agoda.com/?ds=EMdrwVSYLwuX8%2FvI");
+		driver.get(
+				"https://www.agoda.com");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
@@ -31,18 +32,16 @@ public class Agoda_Com {
 		driver.findElement(By.xpath(
 				"//div[@class='PriceSurgePicker-Day__container PriceSurgePicker-Day__container--checkOut PriceSurgePicker-Day__container--selected PriceSurgePicker-Day__container--wide']//div[@class='PriceSurgePicker-Day__circle PriceSurgePicker-Day__circle--filled PriceSurgePicker-Day__circle--selected PriceSurgePicker-Day__circle--wide']"))
 				.click();
-		driver.findElement(By.xpath("//button[@data-selenium='searchButton']")).click();
-
-		Thread.sleep(3000);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()='SEARCH']")).click();
 		driver.findElement(By.xpath("//button[contains(@data-element-name,'search-sort-price')]")).click();
-		List<WebElement> hotelName = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath(
-				"//li[@data-selenium='hotel-item']//div[@class='aff5b-box aff5b-fill-inherit aff5b-text-inherit aff5b-inline      ']/h3"))));
+		List<WebElement> hotelName = driver.findElements(By.xpath("//div[@id='searchPageRightColumn']//header[@data-element-name='property-info-header']//h3"));
 		List<WebElement> hotelPrice = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
 				((By.xpath("//li[@data-selenium='hotel-item']//div[@data-element-name='final-price']")))));
 
 		for (int i = 0; i < hotelName.size(); i++) {
-			Thread.sleep(2000);  
-			System.out.println(hotelName.get(i).getText().trim() + " " + hotelPrice.get(i).getText().trim());
+			Thread.sleep(2000);
+			System.out.println(hotelName.get(i).getText().trim() );
 		}
 	}
 }
